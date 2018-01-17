@@ -1,0 +1,292 @@
+<!doctype html5>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+.Header-Navigation{
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    z-index:99;
+    background-color:white;
+    display:block;
+    text-align:center;
+}
+.placeholder{
+    position:relative;
+}
+.content{
+    position:relative;
+    margin-top:40px;
+}
+.code{
+    font-family:monospace,monospace;
+    background-color:lightgrey;
+}
+a.anchor {
+    display:block;
+    position:relative;
+    top:-180px;
+    visibility:hidden;
+}
+</style>
+</head>
+<html>
+  <body>
+  <div class="Header-Navigation">
+  <h2>Paranoid Encryption Help</h2>
+  <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
+    January 2018
+  </div>
+  <h4>
+  <a href="#introduction">Introduction</a> | 
+  <a href="#installation">Installation</a> | 
+  <a href="#usage">Usage</a> |
+  <a href="#algorithms">What the Code Does</a> | 
+  <a href="#usage_models">Thoughts on How to Use</a> | 
+  <a href="#caveats">Caveats (Warnings)</a>
+  </h4>
+  </div>
+  <div class="placeholder">
+    <h2>Paranoid Encryption Help</h2>
+  <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
+    January 2018
+  </div>
+  <h4>
+  <a href="#introduction">Introduction</a> | 
+  <a href="#installation">Installation</a> | 
+  <a href="#usage">Usage</a> |
+  <a href="#algorithms">What the Code Does</a> | 
+  <a href="#usage_models">Thoughts on How to Use</a> | 
+  <a href="#caveats">Caveats (Warnings)</a>
+  </h4>
+  </div>
+  <div class="content">
+  <a class="anchor" name="introduction"><a><h3>Introduction (What is this good for?)</h3>
+    <p>This software was originally a project started because I was curious to
+      understand the weaknesses in the cryptography that privacy on the internet
+      depends upon. Reading a little literature, poking through the cryptography
+      standards documents and some cryptographic code convinced me that although
+      most of the standard methods are reasonably secure at the moment, they are
+      all vulnerable to increases in computing power and smart cryptanalysts. The
+      only provably uncrackable encryption is a 
+      <a href="https://en.wikipedia.org/wiki/One-time_pad">
+      one-time-pad (see Wikipedia)<a>. One-time-pads are inconvenient to use
+      because they require presharing a well randomized agreed upon key that is 
+      longer than what is to be encrypted. 
+    </p>
+    <p>Paranoid Encrypt (aka. ParaCrypt) is my attempt to make this as convenient
+       as possible. You still must preshare key files with your correspondent, but
+       the files themselves do not have to be completely random. Your key files can
+       be photos, large documents with a mixture of text and images or any other
+       computer file you have handy (see below for caveats, it is possible to 
+       choose bad key files). To make this work you must also share with your
+       correspondent a password (even better, time varying passwords). The key file
+       and the password are combined to make a one-time-pad with good randomness.
+       As long as the password + key file combination is not reused or compromised
+       the encrypted data should be undecipherable. That said, a good cryptanalyst
+       with some idea of what is in your message may be able to extract some of it.
+    </p>
+   <a class="anchor" name="installation"></a><h3>Installation</h3>
+   <ol>
+    <li><p>Install python and graphics libraries:</p>
+    <div class="sub-section" style="font-style:italic">Linux</div>
+    <p>Required packages (install with system package manager): dpkg-dev, build-essential,
+       python3.0-dev (or newer), libjpeg-dev, libtiff-dev, libsdl1.2-dev, 
+       libgstreamer-plugins-base0.10-dev, libnotify-dev, freeglut3, freeglut3-dev, 
+       libsm-dev, libgtk-3-dev, libwebkitgtk-3.0-dev</p>
+    
+    <p>If available the following newer packages might work a bit better: 
+       libgstreamer-plugins-base1.0-dev, libwebkit2gtk-4.0-dev, libsdl2-dev</p>
+
+    <div class="sub-section" style="font-style:italic">MacOS</div>
+    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/mac-osx/">
+       www.python.org</a>.</p>
+    
+       <div class="sub-section" style="font-style:italic">Windows</div>
+    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/windows/">
+       www.python.org</a>.</p>
+       </li>
+    <li>Install wxPython from PyPi. (eg. <span class="code" style="font-style:monospace">
+       pip3 install wxpython</span>). Additional information is available in the wxPython documentation. Available
+       at <a href="https://wxpython.org/" target="_blank">wxpython.org</a>.</li>
+
+    <li>Put the folder for this software somewhere convenient.</li>
+   </ol>
+       
+   <a class="anchor" name="usage"></a><h3>Usage</h3>
+    <div class="sub-section" style="font-style:italic">Command Line</div>
+    <p>The program is written in Python and is compatible with Python3. It may run
+       under Python2.7, but has not been tested. These instructions cover using
+       the graphical user interface (GUI). However, encryption and decryption can be
+       done entirely by calling python functions interactively. This is not covered
+       in these instructions. You will have to read the code.
+    </p>
+    <div class="sub-section" style="font-style:italic">Starting the GUI</div>
+    <p>If the installation was done properly the GUI can be launched by 
+       navigating to the directory containing this software and issuing the
+       command: <span class="code" style="font-style:monospace">python3 wxParaCrypt.py </span>.
+       If python3 is your system default you can just use "python" instead of
+       "python3". The script "wxParaCrypt.py" also specifies what interpreter to use.
+       Thus, if you set the executable bit in your OS, you should be able to launch
+       the program directly. From the command line in *nix use something like:
+       <span class="code" style="font-style:monospace">./wxParaCrypt.py </span>.
+    </p>
+    <p>It is also possible to create a launcher. This will depend upon which window
+       manager you are using. In the lightweight Linux GUIs look for something like
+       "MenuEditor" or a "Run Program..." option.
+    </p>
+    <div class="sub-section" style="font-style:italic">Choosing a Key File</div>
+    <p>It is important to choose a key file that introduces unpredictable randomness.
+       <span style="font-weight:bold">Avoid </span>file types that have any of the following:
+       <ol>
+         <li>Repetative information (patterns).</li>
+         <li>Large swaths of constant values (uncompressed cartoons or other simple
+             graphics: .tiff, .gif, uncompressed .png).</li>
+         <li>Very simple files such as plain text files.</li>
+       </ol>
+    </p>
+    <p>Ideal files are files with unpredictable randomness that only you and your
+       correspondent have. Some examples are:
+       <ul>
+         <li>Photos with complex backgrounds (preferrably natural) that have not 
+             been posted to the internet/cloud.</li>
+         <li>Document files with a mix of text and images (preferably photos) that
+             use a compressed storage format (e.g. .odt, .docx, .zip, .gzip). Compressed
+             files avoid long runs of constant values.
+         </li>
+       </ul>
+    </p>
+    <p>Because of the way the password is used to randomize the key file, even key
+       files that are not very random should provide reasonable encryption. Still
+       it is best to use key files with as much unpredictability as possible. This
+       software makes no effort to estimate the randomness of your key file. There
+       are some utility functions that can be used to judge this in the codebase,
+       but they are slow and designed to be used in interactive python.
+    </p>
+    <div class="sub-section" style="font-style:italic">Choosing a Password</div>
+    <p>Use the same rules you use for choosing a good account password. It should
+       be at least 8 characters long (12 or more is better). It should contain a
+       mixture of upper and lowercase letters, some numbers and symbols. <span
+       style="font-weight:bold">Avoid </span> just slightly modified words or 
+       phrases that can easily be guessed by someone who does a little research
+       on you or your correspondent.
+    </p>
+    <div class="sub-section" style="font-style:italic">Encrypting a File</div>
+    <ol><li>Select the key file you want to use either by clicking on the button
+       or by typing the full path to the key file in the textbox provided.</li>
+       <li>Select the file to encrypt by clicking on the button or by typing the
+       full path in the textbox provided.</li>
+       <li>Type the password in the textbox provided. The password is not obscured; thus
+       you should not use this software in a location where somebody could read
+       or photograph this over your shoulder. A future version may provide the 
+       option to obscure or show the password.</li>
+       <li>Click on the "Encrypt" button and choose a location and name for the
+       encrypted file.</li>
+       <li>A popup window with status messages will appear. Read the messages to 
+       make sure the encryption worked properly. You then may close this window.
+       </li>
+    </ol>
+    <div class="sub-section" style="font-style:italic">Decrypting a File</div>
+    <ol><li>Select the key file you want to use either by clicking on the button
+       or by typing the full path to the key file in the textbox provided.</li>
+       <li>Select the file to decrypt by clicking on the button or by typing the
+       full path in the textbox provided.</li>
+       <li>Type the password in the textbox provided. The password is not obscured; thus
+       you should not use this software in a location where somebody could read
+       or photograph this over your shoulder. A future version may provide the 
+       option to obscure or show the password.</li>
+       <li>Click on the "Decrypt" button and choose a location to save the 
+       decrypted file. NOTE: The name for the file is stored in the encrypted
+       data. <span style="font-weight:bold">If a file of the same name already
+       exists in the location you choose, it will be overwritten!</span></li>
+       <li>A popup window with status messages will appear. Read the messages to 
+       make sure the decryption worked properly. You then may close this window.
+       </li>
+    </ol>
+   <a class="anchor" name="algorithms"></a><h3>What the Code Does</h3>
+   <p>The password is used as the initial seed for the Mersenne Twister psuedo-random
+      number generator. The initial password also determines how many 
+      random bytes are produced before the random number generator is reseeded. 
+      The random bytes generated are xor'd with the key file. Some of these xor'd
+      bytes are used to reseed the random number generator and determine the
+      number of bytes produced before reseeding the random number generator again.
+      All xor'd bytes are used to create a temporary randomized key file. This key
+      file is reproducible given the password and key file because the psuedo-random
+      number generator is deterministic (psuedo-random).
+   </p>
+   <p>If the key file is long enough a random chunk 1.5 times as long as the file to
+      be encrypted is chosen from the temporary randomized key file. Each byte in
+      the file to be encrypted is replaced with the address of a randomly chosen
+      byte in the temporary key file that has the same value. This means that large
+      files are significantly expanded as each byte must be represented by a multbyte
+      address.
+   </p>
+   <p>Decryption is done by reversing the process. The encrypted file starts with 
+      a small variable length header that contains encrypted information about 
+      the encoding of the addresses in the temporary randomized key file.
+   </p>
+   <p>Notice that garbled parts of the encrypted file will not prevent non-garbled
+      parts from being properly decrypted. However, damage to the header may make
+      the file completely undecipherable. The files may also become undecipherable
+      if the version of the Mersenne Twister used by the Python programming language
+      changes.
+   </p>
+   <a class="anchor" name="usage_models"></a><h3>Thoughts on How to Use</h3>
+   <p>Although I believe this code is secure, it has not undergone any professional
+      security testing. Thus even the "High Security Usage" recommendations may not
+      be secure. In general this should be used as another layer of encryption
+      wrapped inside standard security such as https or PGP encrypted e-mail.
+   </p>
+   <div class="sub-section" style="font-style:italic">High Security Usage</div>
+   <p>Choose key files that meet the criteria in the section on choosing key files.
+      Use strong passwords that vary in time. Preshare these with your correspondent
+      as well. You should also agree on something to include in the encrypted file
+      that will act as a signature so your correspondent can be sure it came from you.
+      Store the key files on a removable device and do not attach this storage
+      device to a network connected computer. Do all encryption on a computer or
+      device that is not connected to the networks. Transfer only the encrypted
+      file to the network connected computer to send to your correspondent.
+      Decryption should be handled the same way. Do not resuse key file + password
+      combinations.Transfer encrypted files using encrypted network protocols.
+   </p>
+   <div class="sub-section" style="font-style:italic">Medium Security Usage</div>
+   <p>The restrictions for high security usage could be loosened a little. Rather
+      then deciding ahead of time on which key file to use, the name of the key
+      file for the next encrypted document could be transferred using PGP e-mail
+      and a small key file that is reused with the time varying password.
+   </p>
+   <div class="sub-section"  style="font-style:italic">Low Security Usage</div>
+   <p>Rather than using lots of private key files, share a small number of small
+      key files and time varying passwords. Use these and PGP e-mail to agree on
+      publicly available files as the key files. If your web traffic or your
+      correspondent's web traffic is being monitored, decrypting your messages is
+      reduced to guessing your password and combining that with the monitored
+      downloaded files to decrypt your files.
+   </p>
+   <a class="anchor" name="caveats"></a><h3>Caveats (Warnings)</h3>
+    <ul>
+    <li>This code should not be used for archival (long-term) encryption, because,
+        as noted in the "What the Code Does" section, the encryption depends on
+        the version of the random number generator used by Python. This may change.
+    </li>
+    <li>This code has not undergone a professional security review. Use at your
+        own risk.
+    </li>
+    <li>If you choose weak passwords or key files that are not adequately random
+        the encryption will not be very good. Any file with large swaths of repeated
+        data will be very bad, because the encryption pattern will be
+        determined only by the predictable psuedo-random number generator. Files
+        with patterns (especially repeating) have similar problems.
+    </li>
+    <li>Reusing password + key file combinations will reduce the security of your
+        encryption, because cryptanalysts may be able to figure out some repeats.
+        That said, if your key files are larger than the files being encrypted you
+        will be somewhat protected by the fact that random chunks of the randomized
+        temporary key file are used each time encryption is done. Which chunk will
+        depend on the cryptographic seed provided by your computer.
+    </li>
+    </ul>
+   </div>
+  </body>
+</html>
