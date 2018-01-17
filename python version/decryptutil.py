@@ -1,3 +1,6 @@
+import os
+import math
+
 def decryptbytechunk(encryptkeyfile, offset, bytesperrelativeaddress, nextbytendiness, bytechunk):
     """
     encryptkeyfile              filetype object with bytes at offset+relative address that have the actual value
@@ -118,15 +121,16 @@ def decryptheader(encryptedfile, encryptkeyfile):
     #(so we can seek to the beginning of the data independent of this routine).
     return(filename, offset, bytesperrelativeaddress, bytesofdata, bytesinheader)
     
-def decryptfile(encryptedfile, encryptkeyfile):
+def decryptfile(decryptlocation, encryptedfile, encryptkeyfile):
     """
+    decryptlocation   path to directory to store the decrypted file in.
     encryptedfile     encrypted file type object. The header must be at the beginning of the file.
                       If the encrypted data is embedded within some kind of file this must be
                       a file like object (byte stream) where the zero byte is the beginning of
                       the encrypted data.
     encryptkeyfile    filetype object used to encrypt this data.
     """
-    print('Decrypting header info...')
+    #print('Decrypting header info...')
     filename, offset, bytesperrelativeaddress, bytesofdata, bytesinheader = decryptheader(encryptedfile, encryptkeyfile)
     #TODO: Check that a file with the same name does not exist in the current
     # working directory. If so update file name with trailing integer to 
@@ -134,18 +138,28 @@ def decryptfile(encryptedfile, encryptkeyfile):
     filenamedecoded=filename.decode()
     chunksize = 32767*bytesperrelativeaddress
     print('Decrypting file into \''+filenamedecoded+'\'...')
-    decrypted=open(filenamedecoded,'wb')
+    fullpath = os.path.join(decryptlocation,filenamedecoded)
+    decrypted=open(fullpath,'wb')
     encryptedfile.seek(bytesinheader)
     bytechunk = encryptedfile.read(chunksize)
     startendiness='big'
     #print('read first chunk')
+    ndecrypted=0
     while bytechunk:
         #print('decrypting chunk...')
         startendiness, decryptedchunk=decryptbytechunk(encryptkeyfile, offset, bytesperrelativeaddress, startendiness, bytechunk)
+        chunklength = len(decryptedchunk)
+        ndecrypted += chunklength
+        if ndecrypted > bytesofdata:
+            decryptedchunk=decryptedchunk[:(chunklength-ndecrypted+bytesofdata)]
+            ndecrypted = ndecrypted-chunklength+len(decryptedchunk)
         decrypted.write(decryptedchunk)
         #print('wrote decrypted chunk')
         bytechunk = encryptedfile.read(chunksize)
         #print('read another chunk')
-        #TODO: probably need to check that the correct number of bytes was decrypted.
+        if (len(bytechunk)%bytesperrelativeaddress!=0): #we are at the end of the file/ Fix length.
+            truncateto = int(math.trunc(len(bytechunk)/bytesperrelativeaddress))*bytesperrelativeaddress
+            bytechunk=bytechunk[:truncateto]
+    print("Encrypted  # of bytes: "+str(bytesofdata)+". Actuall # decrypted: "+str(ndecrypted)+".")
     decrypted.close()
     return('Decryption complete.')

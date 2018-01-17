@@ -181,7 +181,7 @@ def encryptbytechunk(keys, nextkeyindeces, bytesperrelativeaddress, nextbytendin
     random.seed()
     encryptedbytechunk=b''
     chunksize=len(bytechunk)
-    print('Size of chunk to encrypt: '+str(chunksize))
+    #print('Size of chunk to encrypt: '+str(chunksize))
     count = 0
     #print(str(bytechunk))
     tempbyte=bytechunk[count:count+1]
@@ -232,37 +232,37 @@ def encryptfile(toencrypt,filetoencryptname,encryptkeyfile):
 	"""
     encrfile=open('.tmpcrypt.ecr','wb')
     inputsize=os.stat(toencrypt.name).st_size
+    #print('Encrypting file of '+str(inputsize)+' bytes')
     keyfilesize = os.stat(encryptkeyfile.name).st_size
-    #The ideal minimum keysize is at least 1.5*inputsize, but needs to be the
-    #full range of the number of bytes needed to encode this. This potentially
-    #makes the key very long, but all bytes will appear completely random. To
-    #be more efficient things would have to be read at the bit level. Could do
-    #packing.
+    #print('using a the keyfile of '+str(keyfilesize)+' bytes.')
+    #The ideal minimum keysize is at least 1.5*inputsize. Better is to be the
+    #full range of the number of bytes that can be encoded by the minimum number
+    #of bytes used to encode the relative offset. This potentially
+    #makes the key very long, but all bytes will appear completely random.
     idealminkeysize=256**(math.ceil(math.log(inputsize*1.5)/math.log(256)))-1
     if keyfilesize > idealminkeysize:
         random.seed()
         offset=random.randint(0,(keyfilesize-idealminkeysize))
         nbytes=idealminkeysize
     else:
-        #nbytes needs to be the biggest power of 256 we can fit in the file.
-        upperbound = math.ceil(math.log(keyfilesize)/math.log(256))
-        if math.log(keyfilesize)/math.log(256) == upperbound:
-            nbytes=keyfilesize-1
-            offset = 0
-        else:
-            nbytes = 256**(upperbound-1)
-            offset=random.randint(0,(keyfilesize-nbytes))
-    print('Generating '+str(nbytes)+' bytes of encryption data...')
+        #use all the bytes in the file.
+        nbytes=keyfilesize-1
+        offset = 0
+        if (keyfilesize < (1.5*inputsize)):
+            print('WARNING: Chosen key is shorter than 1.5*length of')
+            print('    the file being encrypted. This is not ideal.')
+    #print('Generating '+str(nbytes)+' bytes of encryption data...')
+#    print('Using keyfile: '+str(encryptkeyfile.name))
     keys=keylist(encryptkeyfile,offset,nbytes,chunksize=65535)
     header=headerbytes(toencrypt, filetoencryptname, offset, keys, nbytes)
-    print('Writing '+str(len(header))+' bytes of encrypted file header...')
+    #print('Writing '+str(len(header))+' bytes of encrypted file header...')
     encrfile.seek(0)
     encrfile.write(header)
     nextkeyindeces=[]
     for i in range(0,256):
         nextkeyindeces.append(0)
     #print('next keyindeces length: '+str(len(nextkeyindeces))+'. element 255: '+str(nextkeyindeces[255]))
-    print('Encrypting file...')
+    #print('Encrypting file...')
     #read through file to end and encrypt on the fly and write to the tempfile.
     startendiness='big'
     toencrypt.seek(0)
@@ -278,4 +278,14 @@ def encryptfile(toencrypt,filetoencryptname,encryptkeyfile):
         bytechunk=toencrypt.read(65535)
         count+=1
         #print('Chunk of '+str(len(bytechunk))+' bytes.')
+    padsize = int(round((min(1000, offset/2))))
+    padsize = max(padsize,1)
+    if padsize==1:
+        #pick one random byte from key file
+        padstart = random.randint(1,(keyfilesize-1))
+    else:
+        padstart= random.randint(1, (padsize-1))
+    encryptkeyfile.seek(padstart)
+    pad = encryptkeyfile.read(padsize)
+    encrfile.write(pad)
     return (encrfile)
