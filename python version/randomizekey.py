@@ -58,7 +58,7 @@ def randomizefile(torandomize, seedvalue):
         seedstart=min(lastbyte,(chunksize-32))
         seedvalue = randomized[seedstart:(seedstart+16)]
         midchunk = trunc(chunksize/2)
-        midbyte=int.from_bytes(randomized[midbyte:(midbyte+1)],byteorder='big')
+        midbyte=int.from_bytes(randomized[midchunk:(midchunk+1)],byteorder='big')
         chunksize = max(128, (lastbyte+midbyte))
         bytechunk=torandomize.read(chunksize)
     rndfile.flush()
