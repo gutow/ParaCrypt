@@ -1,0 +1,21 @@
+<title>ParaCrypt</title>
+<version>1.0.0RC2</version>
+<version_long>Version 1.0.0 Release Candidate 2<version_long>
+<last-update>January 22, 2018</last-update>
+<author>Jonathan Gutow</author>
+<e-mail>jgutow@new.rr.com</e-mail>
+<license></license>
+<history>
+ <1.0.0RC2>
+  <date>January 22, 2018</date>
+  Bugfix to randomize key to make sure that the central byte of the previous
+  randomized chunk is used to pick the next chunk size. This makes the program
+  incompatible with version 1.0.0RC1 and all previous versions. Modified About
+  Box to use information from this Verison.xml file. Git repository cleanup.
+ </1.0.0RC2>
+ <1.0.0RC1>
+  <date>January 18, 2018</date>
+  Initial wx based graphical user interface version incorporating the python
+  scripts randomizekey.py, encryptutil.py and decryptutil.py.
+ </1.0.0RC1>
+</history>

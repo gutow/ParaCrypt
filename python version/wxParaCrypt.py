@@ -33,12 +33,40 @@ class AppFrame(ParaCryptFrame):
         
     def onAbout(self, event):  # wxGlade: ParaCryptFrame.<event_handler>
         info=wx.adv.AboutDialogInfo()
+        #get the icon
         iconpath=os.path.join(sys.path[0],"ParaCryptArt/ParaCryptIcon256.png")
         tempicon=wx.Icon(iconpath)
         info.SetIcon(tempicon)
         info.SetName("ParaCrypt\n(Paranoid Encrypt)")
-        info.SetVersion(_("1.0.0RC1"),_("Version 1.0.0 Release Candidate 1"))
-        info.SetDevelopers(("Jonathan Gutow",))
+        #get version, authors and license info from Version.xml
+        v = open(os.path.join(sys.path[0],"Version.xml"),"r")
+        version=""
+        versionlong=""
+        license=""
+        developers=[]
+        line=v.readline()
+        while line:
+            #parse lines to get data
+            pos1 = line.find("<version>")
+            if (pos1 >=0):
+                pos2 = line.find("</version>")
+                version=line[(pos1+9):pos2]
+            pos1= line.find("<version_long>")
+            if (pos1 >=0):
+                pos2=line.find("</version_long>")
+                versionlong = line[(pos1+15):pos2]
+            pos1=line.find("<author>")
+            if (pos1 >= 0):
+                pos2=line.find("</author>")
+                developers.append(line[(pos1+8):pos2])
+            pos1=line.find("<license>")
+            if (pos1 >= 0):
+                pos2=line.find("</license>")
+                license=line[(pos1+9):pos2]
+            line=v.readline()
+        v.close()
+        info.SetVersion(version,versionlong)
+        info.SetDevelopers(developers)
         info.SetCopyright(_("(C) 2018 Jonathan Gutow"))
         wx.adv.AboutBox(info,parent=self)
         event.Skip()
