@@ -15,6 +15,11 @@ from ParaCrypt_Glade_GUI import ParaCryptFrame
 
 class AppFrame(ParaCryptFrame):
     
+    keypath=''
+    toencryptpath=''
+    passwd=''
+    resourcepath=''
+    
     def __init__(self, *args, **kwds):
         ParaCryptFrame.__init__(self, *args, **kwds)
         self.keypath=''
@@ -23,6 +28,8 @@ class AppFrame(ParaCryptFrame):
         self.toEncryptPath.ChangeValue(self.toencryptpath)
         self.passwd=''
         self.encryptPassword.ChangeValue(self.passwd)
+        self.resourcepath=''
+        self._setresourcepath()
         #sys.stdout=self.procOutText
         #sys.stderr=self.procOutText
 
@@ -34,12 +41,12 @@ class AppFrame(ParaCryptFrame):
     def onAbout(self, event):  # wxGlade: ParaCryptFrame.<event_handler>
         info=wx.adv.AboutDialogInfo()
         #get the icon
-        iconpath=os.path.join(sys.path[0],"ParaCryptArt/ParaCryptIcon256.png")
+        iconpath=os.path.join(self.resourcepath,"ParaCryptArt/ParaCryptIcon256.png")
         tempicon=wx.Icon(iconpath)
         info.SetIcon(tempicon)
-        info.SetName("ParaCrypt\n(Paranoid Encrypt)")
+        info.SetName("ParaCrypt\n\r(Paranoid Encrypt)")
         #get version, authors and license info from Version.xml
-        v = open(os.path.join(sys.path[0],"Version.xml"),"r")
+        v = open(os.path.join(self.resourcepath,"Version.xml"),"r")
         version=""
         versionlong=""
         licenseversion=""
@@ -68,6 +75,7 @@ class AppFrame(ParaCryptFrame):
         info.SetVersion(version,versionlong)
         info.SetDevelopers(developers)
         info.SetCopyright(_("(C) 2018 Jonathan Gutow"))
+        info.SetLicence(licenseversion)
         wx.adv.AboutBox(info,parent=self)
         event.Skip()
         
@@ -206,6 +214,17 @@ class AppFrame(ParaCryptFrame):
                     return(errFound)
         return(errFound)
         
+    def _setresourcepath(self):
+        if getattr(sys,'frozen',False):
+            if (sys.platform=='darwin'): #we are bundled under MacOS
+                self.resourcepath=os.path.normpath(os.path.join(sys._MEIPASS,'..','Resources'))
+            if (sys.platform.startswith('Win')): #we are bundled under Windows
+                self.resourcepath=sys._MEIPASS
+                print('Windows bundle not yet tested...some resources (e.g. help & icons) may not work.')
+        else: #Running unbundled, so launched as straight python script
+            self.resourcepath=sys.path[0]
+        return()
+    
 #App class
 class ParaCrypt(wx.App):
     def OnInit(self):
