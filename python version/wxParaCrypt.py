@@ -42,7 +42,7 @@ class AppFrame(ParaCryptFrame):
         v = open(os.path.join(sys.path[0],"Version.xml"),"r")
         version=""
         versionlong=""
-        license=""
+        licenseversion=""
         developers=[]
         line=v.readline()
         while line:
@@ -62,7 +62,7 @@ class AppFrame(ParaCryptFrame):
             pos1=line.find("<license>")
             if (pos1 >= 0):
                 pos2=line.find("</license>")
-                license=line[(pos1+9):pos2]
+                licenseversion=line[(pos1+9):pos2]
             line=v.readline()
         v.close()
         info.SetVersion(version,versionlong)
@@ -72,8 +72,8 @@ class AppFrame(ParaCryptFrame):
         event.Skip()
         
     def onHelp(self, event):  # wxGlade: ParaCryptFrame.<event_handler>
-        help=wxhelpDialog.helpDialog(self)
-        help.Show()
+        helpwin=wxhelpDialog.helpDialog(self)
+        helpwin.Show()
         event.Skip()
         
     def onChooseKey(self, event):  
@@ -138,7 +138,7 @@ class AppFrame(ParaCryptFrame):
             os.rename(tempPath,savePath)
             # 4) Securely delete the randomized key file.
             wait.Update(7, "Securely erasing randomized key file...")
-            result=secureerasefile(rndkey)
+            erasestatus=secureerasefile(rndkey)
             wait.Update(8, "Done.")
             print ("Encryption Completed.")
             del wait
@@ -169,10 +169,10 @@ class AppFrame(ParaCryptFrame):
             # 2) Decrypt the file using the temporary randomized key file.
             wait.Update(5, "Decrypting file...")
             todecryptfile=open(self.toencryptpath,'rb')
-            result = decryptfile(savePath,todecryptfile,rndkey)
+            decryptresult = decryptfile(savePath,todecryptfile,rndkey)
             todecryptfile.close()
             wait.Update(7,"Securely erasing randomized key file...")
-            result=secureerasefile(rndkey)
+            eraseresult=secureerasefile(rndkey)
             wait.Update(8, "Done")
             print("Decryption completed.")
             del wait
