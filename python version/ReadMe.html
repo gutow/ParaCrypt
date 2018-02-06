@@ -62,8 +62,8 @@ a.anchor {
   </h4>
   </div>
   <div class="content">
-  <a class="anchor" name="introduction"></a><h3>Introduction (What is this good for?)</h3>
-    <p>This software originally started as a project to better
+  <a class="anchor" name="introduction"><a><h3>Introduction (What is this good for?)</h3>
+    <p>This software was originally a project started because I was curious to
       understand the weaknesses in the cryptography that privacy on the internet
       depends upon. Reading a little literature, poking through the cryptography
       standards documents and some cryptographic code convinced me that although
@@ -71,7 +71,7 @@ a.anchor {
       all vulnerable to increases in computing power and smart cryptanalysts. The
       only provably uncrackable encryption is a 
       <a href="https://en.wikipedia.org/wiki/One-time_pad">
-      one-time-pad (see Wikipedia)</a>. One-time-pads are inconvenient to use
+      one-time-pad (see Wikipedia)<a>. One-time-pads are inconvenient to use
       because they require presharing a well randomized agreed upon key that is 
       longer than what is to be encrypted. 
     </p>
@@ -219,7 +219,7 @@ a.anchor {
       be encrypted is chosen from the temporary randomized key file. Each byte in
       the file to be encrypted is replaced with the address of a randomly chosen
       byte in the temporary key file that has the same value. This means that large
-      files are significantly expanded as each byte must be represented by a multibyte
+      files are significantly expanded as each byte must be represented by a multbyte
       address.
    </p>
    <p>Decryption is done by reversing the process. The encrypted file starts with 
