@@ -44,7 +44,8 @@ a.anchor {
   <a href="#usage">Usage</a> |
   <a href="#algorithms">What the Code Does</a> | 
   <a href="#usage_models">Thoughts on How to Use</a> | 
-  <a href="#caveats">Caveats (Warnings)</a>
+  <a href="#caveats">Caveats (Warnings)</a> |
+  <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
   </h4>
   </div>
   <div class="placeholder">
@@ -58,12 +59,13 @@ a.anchor {
   <a href="#usage">Usage</a> |
   <a href="#algorithms">What the Code Does</a> | 
   <a href="#usage_models">Thoughts on How to Use</a> | 
-  <a href="#caveats">Caveats (Warnings)</a>
+  <a href="#caveats">Caveats (Warnings)</a> |
+  <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
   </h4>
   </div>
   <div class="content">
-  <a class="anchor" name="introduction"><a><h3>Introduction (What is this good for?)</h3>
-    <p>This software was originally a project started because I was curious to
+  <a class="anchor" name="introduction"></a><h3>Introduction (What is this good for?)</h3>
+    <p>This software originally started as a project to better
       understand the weaknesses in the cryptography that privacy on the internet
       depends upon. Reading a little literature, poking through the cryptography
       standards documents and some cryptographic code convinced me that although
@@ -71,7 +73,7 @@ a.anchor {
       all vulnerable to increases in computing power and smart cryptanalysts. The
       only provably uncrackable encryption is a 
       <a href="https://en.wikipedia.org/wiki/One-time_pad">
-      one-time-pad (see Wikipedia)<a>. One-time-pads are inconvenient to use
+      one-time-pad (see Wikipedia)</a>. One-time-pads are inconvenient to use
       because they require presharing a well randomized agreed upon key that is 
       longer than what is to be encrypted. 
     </p>
@@ -88,6 +90,13 @@ a.anchor {
        with some idea of what is in your message may be able to extract some of it.
     </p>
    <a class="anchor" name="installation"></a><h3>Installation</h3>
+   <span style="color:red;">[NOTE to MacOS Users]</span> There is a bundled MacOS package for this which is one of the download options.
+   This bundled package may be installed by dragging the bundle where you want to
+   install it on your Mac, just like any MacOS application. However, for this kind
+   of software you should probably know more about what the software is doing. You
+   are encouraged to do the installation more generically as described below. This
+   will also make sure you are running from a copy were you can read the source
+   code for what is running.
    <ol>
     <li><p>Install python and graphics libraries:</p>
     <div class="sub-section" style="font-style:italic">Linux</div>
@@ -219,7 +228,7 @@ a.anchor {
       be encrypted is chosen from the temporary randomized key file. Each byte in
       the file to be encrypted is replaced with the address of a randomly chosen
       byte in the temporary key file that has the same value. This means that large
-      files are significantly expanded as each byte must be represented by a multbyte
+      files are significantly expanded as each byte must be represented by a multibyte
       address.
    </p>
    <p>Decryption is done by reversing the process. The encrypted file starts with 
@@ -236,7 +245,9 @@ a.anchor {
    <p>Although I believe this code is secure, it has not undergone any professional
       security testing. Thus even the "High Security Usage" recommendations may not
       be secure. In general this should be used as another layer of encryption
-      wrapped inside standard security such as https or PGP encrypted e-mail.
+      wrapped inside standard security such as https or PGP encrypted e-mail. I
+      encourage all users to read the code and let me know of issues using the
+      issue tracker on the public archive website.
    </p>
    <div class="sub-section" style="font-style:italic">High Security Usage</div>
    <p>Choose key files that meet the criteria in the section on choosing key files.
