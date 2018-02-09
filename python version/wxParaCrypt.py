@@ -4,6 +4,7 @@
 #    This is part of the ParaCrypt package which provides one-time-pad encryption
 #    using a combination of preshared files and a password or time-varying 
 #    password.
+#
 #    Copyright (C) 2018 Jonathan Gutow
 #
 #    This program is free software: you can redistribute it and/or modify
