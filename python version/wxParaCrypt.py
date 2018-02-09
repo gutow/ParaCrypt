@@ -67,15 +67,15 @@ class AppFrame(ParaCryptFrame):
         v = open(os.path.join(self.resourcepath,"Version.xml"),"r")
         version=""
         versionlong=""
-        licenseversion=""
+        license_notice=""
         developers=[]
         line=v.readline()
         while line:
             #parse lines to get data
-            pos1 = line.find("<version>")
+            pos1 = line.find("<current_version>")
             if (pos1 >=0):
-                pos2 = line.find("</version>")
-                version=line[(pos1+9):pos2]
+                pos2 = line.find("</current_version>")
+                version=line[(pos1+17):pos2]
             pos1= line.find("<version_long>")
             if (pos1 >=0):
                 pos2=line.find("</version_long>")
@@ -84,16 +84,27 @@ class AppFrame(ParaCryptFrame):
             if (pos1 >= 0):
                 pos2=line.find("</author>")
                 developers.append(line[(pos1+8):pos2])
-            pos1=line.find("<license>")
-            if (pos1 >= 0):
-                pos2=line.find("</license>")
-                licenseversion=line[(pos1+9):pos2]
+            pos1=line.find("<license_notice>")
+            if (pos1 >=0):
+                #read the license notice.
+                pos2=line.find("</license_notice>")
+                if (pos2 < 0):
+                    license_notice+=line[(pos1+16):]
+                    innotice=True
+                    while (innotice):
+                        line=v.readline()
+                        pos2=line.find("</license_notice>")
+                        if (pos2 >=0):
+                            license_notice+=line[:pos2]
+                            innotice=False
+                        else:
+                            license_notice+=line
             line=v.readline()
         v.close()
         info.SetVersion(version,versionlong)
         info.SetDevelopers(developers)
         info.SetCopyright(_("(C) 2018 Jonathan Gutow"))
-        info.SetLicence(licenseversion)
+        info.SetLicence(license_notice)
         wx.adv.AboutBox(info,parent=self)
         event.Skip()
         
