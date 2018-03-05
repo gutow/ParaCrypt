@@ -20,7 +20,7 @@
     margin-top:40px;
 }
 .code{
-    font-family:monospace,monospace;
+    font-family:monospace;
     background-color:lightgrey;
 }
 a.anchor {
@@ -90,7 +90,8 @@ a.anchor {
        with some idea of what is in your message may be able to extract some of it.
     </p>
    <a class="anchor" name="installation"></a><h3>Installation</h3>
-   <span style="color:red;">[NOTE to MacOS Users]</span> There is a bundled MacOS package for this which is one of the download options.
+   <span style="color:red;">[NOTE to MacOS Users]</span> There is a bundled MacOS 
+   package for this which is one of the download options.
    This bundled package may be installed by dragging the bundle where you want to
    install it on your Mac, just like any MacOS application. However, for this kind
    of software you should probably know more about what the software is doing. You
@@ -116,9 +117,10 @@ a.anchor {
     <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/windows/">
        www.python.org</a>.</p>
        </li>
-    <li>Install wxPython from PyPi. (eg. <span class="code" style="font-style:monospace">
-       pip3 install wxpython</span>). Additional information is available in the wxPython documentation. Available
-       at <a href="https://wxpython.org/" target="_blank">wxpython.org</a>.</li>
+    <li>Install wxPython from PyPi using the command line in a terminal 
+       (eg. <span class="code" style="font-style:monospace"> pip3 install wxpython
+       </span>). Additional information is available in the wxPython documentation
+       (see <a href="https://wxpython.org/" target="_blank">wxpython.org</a>).</li>
 
     <li>Put the folder for this software somewhere convenient.</li>
    </ol>
@@ -283,6 +285,9 @@ a.anchor {
     </li>
     <li>This code has not undergone a professional security review. Use at your
         own risk.
+    </li>
+    <li>Version 1.0 has limited error checking. It may crash if you attempt to 
+        decrypt a file with the wrong keyfile or password.
     </li>
     <li>If you choose weak passwords or key files that are not adequately random
         the encryption will not be very good. Any file with large swaths of repeated

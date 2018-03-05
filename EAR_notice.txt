@@ -1,0 +1,17 @@
+to: crypt@bis.doc.gov
+to: enc@nsa.gov
+Subject: Notice of publically available encryption source code classified under ECCN 5D002 
+
+To whom it may concern. I am distributing source code to create one-time-pads
+for encryption of digital data. The code is distributed under the GPL V3 or
+above open source license and will be available on sourceforge.net at
+https://sourceforge.net/projects/paracrypt/. The site will become active on
+March 30, 2018 or soon thereafter.
+
+Questions can be addressed to me using the support request page.
+https://sourceforge.net/p/paracrypt/support-requests/
+Anonymous requests are accepted, but requests from a sourceforge account are
+better tracked.
+
+Regards,
+Jonathan Gutow
