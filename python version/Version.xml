@@ -26,9 +26,9 @@
 </xs:schema> 
 </head>
 <title>ParaCrypt</title>
-<current_version>1.0.0RC2</current_version>
-<version_long>Version 1.0.0 Release Candidate 2</version_long>
-<last-update>January 22, 2018</last-update>
+<current_version>1.0.0RC3</current_version>
+<version_long>Version 1.0.0 Release Candidate 3</version_long>
+<last-update>March 4, 2018</last-update>
 <author>Jonathan Gutow</author>
 <e-mail>jgutow@new.rr.com</e-mail>
 <license>GNU GPL V3</license>
@@ -53,6 +53,15 @@
     along with this program.  If not, see https://www.gnu.org/licenses/.
 </license_notice>
 <history>
+ <entry>
+  <version>1.0.0RC3</version>
+   <date>March 4, 2018</date>
+   Typos and reserved word usage fixed. Adaptations and more artwork to allow
+   MacOS bundling. License headers added to files. Added text for Export
+   Administration Regulations email notice of exemption from export restictions
+   for publically available encryption source code. Minor text updates to help
+   and Readme.html
+ </entry>
  <entry>
   <version>1.0.0RC2</version>
    <date>January 22, 2018</date>
