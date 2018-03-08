@@ -32,6 +32,7 @@ import os
 import sys
 import wxParaCrypt
 from wxParaCrypt import AppFrame
+from urllib.parse import quote as quoteURL
 # end wxGlade
 
 
@@ -44,7 +45,7 @@ class helpDialog(wx.Dialog):
         self.HelpForwardButton = wx.Button(self, wx.ID_ANY, ">")
         self.HelpURL = wx.TextCtrl(self, wx.ID_ANY, "", style=wx.HSCROLL | wx.TE_READONLY)
         self.helpView = wx.html2.WebView.New(self)
-        helppath = os.path.join(self.Parent.resourcepath,"ParaCryptHelp/ParaCryptHelp.html")
+        helppath = quoteURL(os.path.join(self.Parent.resourcepath,"ParaCryptHelp","ParaCryptHelp.html"))
         self.helpView.LoadURL("file://"+helppath)
         self.HelpURL.ChangeValue("file://"+helppath)
         
