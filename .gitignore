@@ -1,4 +1,6 @@
 *.pyc
-build/*
-dist/*
+build/
+dist/
 .DS_Store
+.gitignore~
+*.html#
