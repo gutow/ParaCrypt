@@ -1,0 +1,6 @@
+/bin/
+*.wxg
+*.ipynb
+/_pycache_/
+/ParaCrypt-1.0.0RC1.tar.bz2
+*~
