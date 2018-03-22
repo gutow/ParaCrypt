@@ -11,7 +11,7 @@
 
   parts:
     ParaCrypt:
-      source: https://github.com/gutow/ParaCrypt.git
+      source: 'https://github.com/gutow/ParaCrypt.git/python version'
       plugin: python
       python-version: python3
       python-packages: wxpython
