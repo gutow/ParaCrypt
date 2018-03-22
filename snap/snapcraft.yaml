@@ -10,7 +10,13 @@
   confinement: devmode # use 'strict' once you have the right plugs and slots
 
   parts:
-    my-part:
-      # See 'snapcraft plugins'
-      plugin: nil
+    ParaCrypt:
+      source: https://github.com/gutow/ParaCrypt.git
+      plugin: python
+      python-version: python3
+      python-packages: wxpython
+  apps:
+    ParaCrypt:
+      command: wxParaCrypt.py
+      icon: ParaCryptArt/ParaCryptIcon.svg
   
