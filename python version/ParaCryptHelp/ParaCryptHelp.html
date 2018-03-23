@@ -36,31 +36,33 @@ a.anchor {
   <div class="Header-Navigation">
   <h2>Paranoid Encryption Help</h2>
   <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
-    January 2018
+    March 2018
   </div>
   <h4>
   <a href="#introduction">Introduction</a> | 
-  <a href="#installation">Installation</a> | 
   <a href="#usage">Usage</a> |
   <a href="#algorithms">What the Code Does</a> | 
   <a href="#usage_models">Thoughts on How to Use</a> | 
   <a href="#caveats">Caveats (Warnings)</a> |
   <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
+  <a href="https://sourceforge.net/projects/paracrypt/">Code Repository</a> | 
+  <a href="https://paracrypt.sourceforge.io/">Website (more help)</a> | 
   </h4>
   </div>
   <div class="placeholder">
     <h2>Paranoid Encryption Help</h2>
   <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
-    January 2018
+    March 2018
   </div>
   <h4>
   <a href="#introduction">Introduction</a> | 
-  <a href="#installation">Installation</a> | 
   <a href="#usage">Usage</a> |
   <a href="#algorithms">What the Code Does</a> | 
   <a href="#usage_models">Thoughts on How to Use</a> | 
   <a href="#caveats">Caveats (Warnings)</a> |
   <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
+  <a href="https://sourceforge.net/projects/paracrypt/">Code Repository</a> | 
+  <a href="https://paracrypt.sourceforge.io/">Website (more help)</a> | 
   </h4>
   </div>
   <div class="content">
@@ -68,16 +70,17 @@ a.anchor {
     <p>This software originally started as a project to better
       understand the weaknesses in the cryptography that privacy on the internet
       depends upon. Reading a little literature, poking through the cryptography
-      standards documents and some cryptographic code convinced me that although
-      most of the standard methods are reasonably secure at the moment, they are
+      standards documents and some cryptographic code convinced me that
+      most of the standard methods are reasonably secure at the moment. However,
+      they are
       all vulnerable to increases in computing power and smart cryptanalysts. The
       only provably uncrackable encryption is a 
       <a href="https://en.wikipedia.org/wiki/One-time_pad">
       one-time-pad (see Wikipedia)</a>. One-time-pads are inconvenient to use
       because they require presharing a well randomized agreed upon key that is 
-      longer than what is to be encrypted. 
+      longer than what is to be encrypted.
     </p>
-    <p>Paranoid Encrypt (aka. ParaCrypt) is my attempt to make this as convenient
+    <p>Paranoid Encryption (aka. ParaCrypt) is my attempt to make this as convenient
        as possible. You still must preshare key files with your correspondent, but
        the files themselves do not have to be completely random. Your key files can
        be photos, large documents with a mixture of text and images or any other
@@ -86,45 +89,8 @@ a.anchor {
        correspondent a password (even better, time varying passwords). The key file
        and the password are combined to make a one-time-pad with good randomness.
        As long as the password + key file combination is not reused or compromised
-       the encrypted data should be undecipherable. That said, a good cryptanalyst
-       with some idea of what is in your message may be able to extract some of it.
+       the encrypted data should be undecipherable.
     </p>
-   <a class="anchor" name="installation"></a><h3>Installation</h3>
-   <span style="color:red;">[NOTE to MacOS Users]</span> There is a bundled MacOS 
-   package for this which is one of the download options.
-   This bundled package may be installed by dragging the bundle where you want to
-   install it on your Mac, just like any MacOS application. However, for this kind
-   of software you should probably know more about what the software is doing. You
-   are encouraged to do the installation more generically as described below. This
-   will also make sure you are running from a copy were you can read the source
-   code for what is running.
-   <ol>
-    <li><p>Install python and graphics libraries:</p>
-    <div class="sub-section" style="font-style:italic">Linux</div>
-    <p>Required packages (install with system package manager): dpkg-dev, build-essential,
-       python3.0-dev (or newer), libjpeg-dev, libtiff-dev, libsdl1.2-dev, 
-       libgstreamer-plugins-base0.10-dev, libnotify-dev, freeglut3, freeglut3-dev, 
-       libsm-dev, libgtk-3-dev, libwebkitgtk-3.0-dev</p>
-    
-    <p>If available the following newer packages might work a bit better: 
-       libgstreamer-plugins-base1.0-dev, libwebkit2gtk-4.0-dev, libsdl2-dev</p>
-
-    <div class="sub-section" style="font-style:italic">MacOS</div>
-    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/mac-osx/">
-       www.python.org</a>.</p>
-    
-       <div class="sub-section" style="font-style:italic">Windows</div>
-    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/windows/">
-       www.python.org</a>.</p>
-       </li>
-    <li>Install wxPython from PyPi using the command line in a terminal 
-       (eg. <span class="code" style="font-style:monospace"> pip3 install wxpython
-       </span>). Additional information is available in the wxPython documentation
-       (see <a href="https://wxpython.org/" target="_blank">wxpython.org</a>).</li>
-
-    <li>Put the folder for this software somewhere convenient.</li>
-   </ol>
-       
    <a class="anchor" name="usage"></a><h3>Usage</h3>
     <div class="sub-section" style="font-style:italic">Command Line</div>
     <p>The program is written in Python and is compatible with Python3. It may run
@@ -134,6 +100,8 @@ a.anchor {
        in these instructions. You will have to read the code.
     </p>
     <div class="sub-section" style="font-style:italic">Starting the GUI</div>
+    <p>If you installed the MacOS application you can launch it as normal by
+       double-clicking on the application icon. All others continue reading.</p>
     <p>If the installation was done properly the GUI can be launched by 
        navigating to the directory containing this software and issuing the
        command: <span class="code" style="font-style:monospace">python3 wxParaCrypt.py </span>.

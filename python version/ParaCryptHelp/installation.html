@@ -1,0 +1,59 @@
+<!DocType HTML5>
+<head>
+<meta charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="header.css">
+<link rel="stylesheet" type="text/css" href="content.css">
+<link rel="stylesheet" type="text/css" href="footer.css">
+<script type="text/javascript" src="domelemfromfile.js"></script>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+   //load the extra pieces from files.
+   fromfile("header","header.elem");
+   fromfile("footer","footer.elem");
+});
+</script>
+</head>
+<body>
+<div id="header" class="header"></div>
+<div id="content" class="content">
+<!--Put content here. Special styling should be put in content.css-->
+   <a class="anchor" name="installation"></a><h3>Installation</h3>
+   <span style="color:red;">[NOTE to MacOS Users]</span> There is a bundled MacOS 
+   package for this which is one of the download options.
+   This bundled package may be installed by dragging the application where you want to
+   install it on your Mac, just like any MacOS application. However, for this kind
+   of software you should probably know more about what the software is doing. You
+   are encouraged to do the installation more generically as described below. This
+   will also make sure you are running from a copy where you can read the source
+   code for what is running.
+   <ol>
+    <li><p>Install python and graphics libraries:</p>
+    <div class="sub-section" style="font-style:italic">Linux</div>
+    <p>Required packages (install with system package manager): dpkg-dev, build-essential,
+       python3.0-dev (or newer), libjpeg-dev, libtiff-dev, libsdl1.2-dev, 
+       libgstreamer-plugins-base0.10-dev, libnotify-dev, freeglut3, freeglut3-dev, 
+       libsm-dev, libgtk-3-dev, libwebkitgtk-3.0-dev</p>
+    
+    <p>If available the following newer packages might work a bit better: 
+       libgstreamer-plugins-base1.0-dev, libwebkit2gtk-4.0-dev, libsdl2-dev</p>
+
+    <div class="sub-section" style="font-style:italic">MacOS</div>
+    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/mac-osx/">
+       www.python.org</a>.</p>
+    
+       <div class="sub-section" style="font-style:italic">Windows</div>
+    <p>Install a version of Python 3+ from <a href="https://www.python.org/downloads/windows/">
+       www.python.org</a>.</p>
+       </li>
+    <li>Install wxPython from PyPi using the command line in a terminal 
+       (eg. <span class="code" style="font-style:monospace"> pip3 install wxpython
+       </span>). Additional information is available in the wxPython documentation
+       (see <a href="https://wxpython.org/" target="_blank">wxpython.org</a>).</li>
+
+    <li>Download the .zip of this software and decompress the folder (directory)
+        somewhere convenient.</li>
+   </ol>
+</div>
+<div id="footer" class="footer"></div>
+</body>
+</html>
