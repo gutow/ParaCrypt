@@ -37,5 +37,5 @@ app = BUNDLE(coll,
              icon='ParaCryptArt/ParaCrypt.icns',
              bundle_identifier=None,
              info_plist={
-                'CFBundleShortVersionString':'1.0.0RC3'
+                'CFBundleShortVersionString':'1.0.0'
              },)
