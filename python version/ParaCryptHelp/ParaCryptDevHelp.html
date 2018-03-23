@@ -1,0 +1,73 @@
+<!doctype html5>
+<head>
+<meta charset="utf-8"/>
+<style type="text/css">
+.Header-Navigation{
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:100%;
+    z-index:99;
+    background-color:white;
+    display:block;
+    text-align:center;
+}
+.placeholder{
+    position:relative;
+}
+.content{
+    position:relative;
+    margin-top:40px;
+}
+.code{
+    font-family:monospace;
+    background-color:lightgrey;
+}
+a.anchor {
+    display:block;
+    position:relative;
+    top:-180px;
+    visibility:hidden;
+}
+</style>
+</head>
+<html>
+  <body>
+  <div class="Header-Navigation">
+  <h2>Paranoid Encryption Developer Help</h2>
+  <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
+    March 2018
+  </div>
+  <h4>
+  <a href="#introduction">Introduction</a> | 
+  <a href="#caveats">Build a Mac Bundle</a> |
+  <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
+  </h4>
+  </div>
+  <div class="placeholder">
+    <h2>Paranoid Encryption Developer Help</h2>
+  <div id="author" class="byline" style="font-style:italic">Jonathan Gutow, 
+    January 2018
+  </div>
+  <h4>
+  <a href="#introduction">Introduction</a> | 
+  <a href="#macbundle">Build a Mac Bundle</a> |
+  <a href="file:license-gpl-3.0.txt">License (GPL V3)</a>
+  </h4>
+  </div>
+  <div class="content">
+  <a class="anchor" name="introduction"></a><h3>Introduction</h3>
+    <p>This file contains notes on how do do particular tasks related to
+    maintaining, building and releasing this software.
+    </p>
+   <a class="anchor" name="macbundle"></a><h3>Build a Mac Bundle</h3>
+    <p>
+      <ol><li>Need a proper MacOS.spec file (see pyinstaller documentation).</li>
+      <li>Make sure to change the version number in the MacOS.spec file before bundling</li>
+      <li>In terminal navigate to the directory containing code and MacOS.spec</li>
+      <li>Issue the command <span class="code">pyintaller -w MacOS.spec</span></li>
+      </ol>
+    </p>
+   </div>
+  </body>
+</html>

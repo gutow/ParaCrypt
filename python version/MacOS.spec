@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['wxParaCrypt.py'],
-             pathex=['/Users/jonathan/ParaCrypt-1.0.0RC2.5/dist'],
+             pathex=[''],
              binaries=[],
              datas=[('ParaCryptArt/*.*','ParaCryptArt'),('ParaCryptHelp/*.*','ParaCryptHelp'),
              ('Version.xml','.')],
@@ -35,4 +35,7 @@ coll = COLLECT(exe,
 app = BUNDLE(coll,
              name='wxParaCrypt.app',
              icon='ParaCryptArt/ParaCrypt.icns',
-             bundle_identifier=None)
+             bundle_identifier=None,
+             info_plist={
+                'CFBundleShortVersionString':'1.0.0RC3'
+             },)
