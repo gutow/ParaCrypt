@@ -3,6 +3,7 @@
 <head>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
  <xs:element type="xs:string" name="title"/>
+ <xs:element type="xs:string" name="title_long"/>
  <xs:element type="xs:string" name="version"/>
  <xs:element type="xs:string" name="current_version"/>
  <xs:element type="xs:string" name="version_long"/>
@@ -26,6 +27,7 @@
 </xs:schema> 
 </head>
 <title>ParaCrypt</title>
+<title_long>Paranoid Encryption</title_long>
 <current_version>1.0.0RC3</current_version>
 <version_long>Version 1.0.0 Release Candidate 3</version_long>
 <last-update>March 4, 2018</last-update>
@@ -51,6 +53,11 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see https://www.gnu.org/licenses/.
+    
+    NOTICE: The following are copyrighted separately by Jonathan Gutow 2018: the
+      ParaCrypt logo; the names "ParaCrypt" and "Paranoid Encryption"; the
+      phrase "more convenient one-time-pad encryption". Derivative works must 
+      use different names and logos.
 </license_notice>
 <history>
  <entry>

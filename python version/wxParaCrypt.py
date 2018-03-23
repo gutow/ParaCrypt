@@ -63,7 +63,7 @@ class AppFrame(ParaCryptFrame):
         iconpath=os.path.join(self.resourcepath,"ParaCryptArt/ParaCryptIcon256.png")
         tempicon=wx.Icon(iconpath)
         info.SetIcon(tempicon)
-        info.SetName("ParaCrypt\n\r(Paranoid Encrypt)")
+        info.SetName("ParaCrypt\n\r(Paranoid Encryption)")
         #get version, authors and license info from Version.xml
         v = open(os.path.join(self.resourcepath,"Version.xml"),"r")
         version=""
